@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import Item from './Item';
-import menu from './items.json';
+import menu from 'data/menu.json';
 import styles from './Items.module.scss';
+import { Cardapio } from 'types/Prato';
 
 interface Props {
   search: string,
@@ -23,30 +24,28 @@ export default function Items(props: Props) {
     return true;
   }
 
-  function toOrder(newList: typeof menu) {
+  function toOrder(newList: Cardapio) {
     switch(order) {
-      case 'porcao':
-        return newList.sort((a, b) => a.size > b.size ? 1 : -1)
-      case 'qtd_pessoas':
-        return newList.sort((a, b) => a.serving > b.serving ? 1 : -1)
-      case 'preco':
-        return newList.sort((a, b) => a.price > b.price ? 1 : -1)
-      default:
-        return newList;
+    case 'porcao':
+      return newList.sort((a, b) => a.size > b.size ? 1 : -1);
+    case 'qtd_pessoas':
+      return newList.sort((a, b) => a.serving > b.serving ? 1 : -1);
+    case 'preco':
+      return newList.sort((a, b) => a.price > b.price ? 1 : -1);
+    default:
+      return newList;
     }
   }
 
   useEffect(() => {
-    const newList = menu.filter(item => testSearch(item.title) && testFilter(item.category.id))
-    setList(toOrder(newList))
-  }, [search, filter, order])
+    const newList = menu.filter(item => testSearch(item.title) && testFilter(item.category.id));
+    setList(toOrder(newList));
+  }, [search, filter, order]);
 
   return (
     <div className={styles.itens}>
       {list.map((item) => (
-        <div>
-          <Item key={item.id} {...item} />
-        </div>
+        <Item key={item.id} {...item} />
       ))}
     </div>
   );

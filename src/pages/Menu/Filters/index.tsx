@@ -12,9 +12,9 @@ interface Props {
 
 export default function Filters({ filter, setFilter }: Props) {
   function selectFilter(option: IOption) {
-    if(filter === option.id) return setFilter(null)
+    if(filter === option.id) return setFilter(null);
   
-    return setFilter(option.id)
+    return setFilter(option.id);
   }
 
   return (
@@ -23,7 +23,7 @@ export default function Filters({ filter, setFilter }: Props) {
         <button className={classNames({
           [styles.filtros__filtro]: true,
           [styles['filtros__filtro--ativo']]: filter === option.id
-        })} key={option.id} onClick={() => { selectFilter(option) }} >
+        })} key={option.id} onClick={() => { selectFilter(option); }} >
           {option.label}
         </button>
       ))}

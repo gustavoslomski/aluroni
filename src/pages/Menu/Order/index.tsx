@@ -11,7 +11,7 @@ interface Props {
 
 export default function Order({ order, setOrder }: Props) {
   const [open, setOpen] = useState(false);
-  const orderName = order && options.find(option => option.value === order)?.nome
+  const orderName = order && options.find(option => option.value === order)?.nome;
 
   return (
     <button 
@@ -19,14 +19,14 @@ export default function Order({ order, setOrder }: Props) {
         [styles.ordenador]: true,
         [styles['ordenador--ativo']]: order !== ''
       })} 
-      onClick={() => { setOpen(open => !open) }}
-      onBlur={() => { setOpen(false) }}
+      onClick={() => { setOpen(open => !open); }}
+      onBlur={() => { setOpen(false); }}
     >
       <span>{orderName || 'Ordenar por'}</span>
       {open? <MdKeyboardArrowUp size={20} /> : <MdKeyboardArrowDown size={20} /> }
       <div className={classNames({
         [styles.ordenador__options]: true,
-        [styles["ordenador__options--ativo"]]: open
+        [styles['ordenador__options--ativo']]: open
       })}>
         {options.map((option) => (
           <div key={option.value} className={styles.ordenador__option} onClick={() => setOrder(option.value)}>
